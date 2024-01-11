@@ -68,7 +68,7 @@ class SiteController extends Controller
 public function actionCreate()
         {
             $post = new Post(); // Change variable name to $post
-            return $this->render('create', ['post' => $post]); // Corrected assignment
+            return $this->render('create', ['post' => $post]); 
         }
 
     /**

@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Post;
+use app\models\createUser;
 
 class SiteController extends Controller
 {
@@ -72,7 +73,7 @@ class SiteController extends Controller
             
             if ($post->load($formData)) { // Fix the syntax error, use "->" instead of "->"
                 if ($post->save()) {
-                    yii::$app->getSession()->setFlash('success', 'Post is published successfully'); // Fix the typo in the success message
+                    yii::$app->getSession()->setFlash('message', 'Post is published successfully'); // Fix the typo in the success message
                     return $this->redirect(['index']); // Fix the syntax error, use "->" instead of "="
                 } else {
                     yii::$app->getSession()->setFlash('message', 'Failed to publish'); // Fix the typo in the failure message
@@ -102,6 +103,20 @@ class SiteController extends Controller
                 yii::$app->getSession()->setFlash('success', 'Post is Deleted successfully'); 
                 return $this->redirect(['index', ['post' => $post]]); // Fix the syntax here
             }
+        }
+        public function actionCreateUser()
+        {
+            $model = new UserRegistrationForm();
+    
+            if (Yii::$app->request->isPost) {
+                $model->load(Yii::$app->request->post());
+                if ($model->register()) {
+                    Yii::$app->session->setFlash('success', 'User created successfully.');
+                    return $this->redirect(['index']); // Redirect to the home page or any other page
+                }
+            }
+    
+            return $this->render('create-user', ['model' => $model]);
         }
     /**
      * Login action.

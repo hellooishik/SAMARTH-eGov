@@ -20,8 +20,8 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         ],
         '101' => [
             'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
+            'username' => 'samarth',
+            'password' => 'eGOV2024',
             'authKey' => 'test101key',
             'accessToken' => '101-token',
         ],
@@ -83,9 +83,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         return $this->authKey;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    
     public function validateAuthKey($authKey)
     {
         return $this->authKey === $authKey;

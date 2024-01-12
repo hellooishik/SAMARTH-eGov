@@ -42,6 +42,14 @@ $config = [
             ],
         ],
         'db' => $db,
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                'create-user' => 'site/createUser',
+                // ... other rules ...
+            ],
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

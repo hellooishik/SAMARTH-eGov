@@ -6,6 +6,7 @@ use yii\db\ActiveRecord;
 
 class Post extends ActiveRecord
 {
+   
     
     public function rules()
     {

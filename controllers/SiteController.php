@@ -65,12 +65,44 @@ class SiteController extends Controller
             $posts = Post::find()->all();
             return $this->render('home', ['posts' => $posts]);
         }
-public function actionCreate()
+        public function actionCreate()
         {
             $post = new Post(); // Change variable name to $post
-            return $this->render('create', ['post' => $post]); 
+            $formData = yii::$app->request->post();
+            
+            if ($post->load($formData)) { // Fix the syntax error, use "->" instead of "->"
+                if ($post->save()) {
+                    yii::$app->getSession()->setFlash('success', 'Post is published successfully'); // Fix the typo in the success message
+                    return $this->redirect(['index']); // Fix the syntax error, use "->" instead of "="
+                } else {
+                    yii::$app->getSession()->setFlash('message', 'Failed to publish'); // Fix the typo in the failure message
+                }
+            }
+        
+            return $this->render('create', ['post' => $post]);
         }
+        public function actionView($id){
+            $post = post::findOne($id);
+            echo $id;
+            return $this->render('view', ['post' => $post]);
+        }
+        public function actionUpdate($id){
+            $post = Post::findOne($id);
 
+    if ($post->load(Yii::$app->request->post()) && $post->save()) {
+        Yii::$app->session->setFlash('success', 'Post Updated Successfully');
+        return $this->redirect(['index', 'id' => $post->ID]); // Fix the syntax here
+    } else {
+        return $this->render('update', ['post' => $post]);
+    }
+        }
+        public function actionDelete($id){
+            $post = Post::findOne($id)->delete();
+            if($post){
+                yii::$app->getSession()->setFlash('success', 'Post is Deleted successfully'); 
+                return $this->redirect(['index', ['post' => $post]]); // Fix the syntax here
+            }
+        }
     /**
      * Login action.
      *

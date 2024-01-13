@@ -41,6 +41,14 @@ $config = [
                 ],
             ],
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                // ... other rules ...
+                'api/<id:\d+>' => 'site/api', // Adjust controller name if necessary
+            ],
+        ],
         'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,

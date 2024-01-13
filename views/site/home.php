@@ -7,7 +7,7 @@ $this->title = "Coral Grid Preparation";
 <div class="site-index">
     <?php if(Yii::$app->user->isGuest): ?>
         <div class="alert alert-dismissible alert-info">Hi SAMARTH
-            <p>Please login to view inventory data.</p>
+            <p>Please login to view inventory data. Username : Admin; Password : admin</p>
             <style>
                 .alert-info {
     color: #0c5460;
@@ -42,7 +42,7 @@ $this->title = "Coral Grid Preparation";
         <?php endif; ?>
 
         <div class="jumbotron">
-            <h1 class="text-center text-primary">The Coral Grid Preparation</h1>
+            <h1 class="text-center text-primary">SAMARTH eGov Inventory</h1>
         </div>
 
         <div class="row">
@@ -86,7 +86,7 @@ $this->title = "Coral Grid Preparation";
                                                     'method' => 'post'
                                                 ],
                                             ]) ?>
-                                            <?= Html::a('fetch', ['fetchdata', 'id' => $post->ID], ['class' => 'btn btn-warning']) ?>
+                                             <?= Html::a('Fetch', ['site/index'], ['class' => 'btn btn-primary']) ?>
                                             
                                         </div>
                                     </td>

@@ -11,23 +11,9 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Post;
 use app\models\createUser;
-class InventoryController extends Controller
-{
-    public function actionFetchApiData($itemId)
-    {
-        // Use Yii::$app->externalApi to access the configured external API client
-        $externalApiService = new ExternalApiService(Yii::$app->externalApi);
-        $data = $externalApiService->fetchInventoryDetails($itemId);
+use app\component\api;
+use app\component\googleSearch;
 
-        if ($data !== null) {
-            // Display the fetched data in the UI or redirect to a view
-            return $this->render('api-data-view', ['data' => $data]);
-        } else {
-            // Handle API error
-            return $this->render('api-error-view');
-        }
-    }
-}
 class SiteController extends Controller
 {
     /**
@@ -82,11 +68,52 @@ class SiteController extends Controller
             $posts = Post::find()->all();
             return $this->render('home', ['posts' => $posts]);
         }
-        public function actionFetch($id){
-            $post = post::findOne($id);
-            echo $id;
-            return $this->render('view', ['fetchdata' => $posts]);
+        
 
+        public function actionApi($id)
+{
+    $post = Post::findOne($id);
+
+    if ($post) {
+        // Implement your fetching logic here
+        // You can use $post->ID or $post->Title to fetch data from the API
+
+        Yii::$app->session->setFlash('success', 'Data fetched successfully.');
+    } else {
+        Yii::$app->session->setFlash('error', 'Post not found.');
+    }
+
+    return $this->redirect(['index']); // Redirect to the index page or any other page
+}
+        public function actionapifetch()
+        {
+          
+    
+            if ($post) {
+                $googleApi = Yii::$app->externalApi; // Assuming you configured this in components
+                $googleApiKey = 'AIzaSyDp4oPYZ4qOdfUlKpD-7S8hpAYWFTNEBFM'; // Replace with your actual Google API key
+    
+                $googleSearchService = new GoogleSearchService($googleApi, $googleApiKey);
+                $searchResults = $googleSearchService->searchByTitle($post->Title);
+    
+                // Save search results to the database or do any necessary processing
+                // Example: Save the search results to a new table named 'google_search_results'
+                // Adjust the table and attribute names according to your database structure
+                foreach ($searchResults['items'] as $item) {
+                    $googleResult = new GoogleSearchResult();
+                    $googleResult->post_id = $post->ID;
+                    $googleResult->title = $item['title'];
+                    $googleResult->snippet = $item['snippet'];
+                    $googleResult->link = $item['link'];
+                    $googleResult->save();
+                }
+    
+                Yii::$app->session->setFlash('success', 'Data fetched and saved successfully.');
+            } else {
+                Yii::$app->session->setFlash('error', 'Post not found.');
+            }
+    
+            return $this->redirect(['index']); // Redirect to the index page or any other page
         }
         public function actionCreate()
         {
@@ -199,6 +226,8 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+       
+        return $this->render('site/about');
+    
     }
 }

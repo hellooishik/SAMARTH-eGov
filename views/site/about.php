@@ -5,14 +5,33 @@
 use yii\helpers\Html;
 
 $this->title = 'About';
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="body-content">
+        <h1><?= Html::encode($post->Title) ?></h1>
 
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Categories:</strong>
+                <span class="badge bg-primary rounded-pill"><?= Html::encode($post->categories) ?></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Details:</strong>
+                <span class="badge bg-primary rounded-pill"><?= Html::encode($post->details) ?></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Price:</strong>
+                <span class="badge bg-primary rounded-pill"><?= Html::encode($post->price) ?></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Supplier:</strong>
+                <span class="badge bg-primary rounded-pill"><?= Html::encode($post->supplier) ?></span>
+            </li>
+        </ul>
 
-    <code><?= __FILE__ ?></code>
+        <div class="row mt-3">
+            <a href="<?= yii::$app->homeUrl ?>" class="btn btn-primary">Go back</a>
+        </div>
+    </div>
 </div>

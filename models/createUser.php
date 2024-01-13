@@ -1,4 +1,4 @@
-// models/UserRegistrationForm.php
+<?php
 
 namespace app\models;
 

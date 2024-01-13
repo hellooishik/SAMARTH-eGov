@@ -11,7 +11,23 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Post;
 use app\models\createUser;
+class InventoryController extends Controller
+{
+    public function actionFetchApiData($itemId)
+    {
+        // Use Yii::$app->externalApi to access the configured external API client
+        $externalApiService = new ExternalApiService(Yii::$app->externalApi);
+        $data = $externalApiService->fetchInventoryDetails($itemId);
 
+        if ($data !== null) {
+            // Display the fetched data in the UI or redirect to a view
+            return $this->render('api-data-view', ['data' => $data]);
+        } else {
+            // Handle API error
+            return $this->render('api-error-view');
+        }
+    }
+}
 class SiteController extends Controller
 {
     /**
@@ -65,6 +81,12 @@ class SiteController extends Controller
         {
             $posts = Post::find()->all();
             return $this->render('home', ['posts' => $posts]);
+        }
+        public function actionFetch($id){
+            $post = post::findOne($id);
+            echo $id;
+            return $this->render('view', ['fetchdata' => $posts]);
+
         }
         public function actionCreate()
         {

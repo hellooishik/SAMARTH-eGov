@@ -86,6 +86,8 @@ $this->title = "Coral Grid Preparation";
                                                     'method' => 'post'
                                                 ],
                                             ]) ?>
+                                            <?= Html::a('fetch', ['fetchdata', 'id' => $post->ID], ['class' => 'btn btn-warning']) ?>
+                                            
                                         </div>
                                     </td>
                                 </tr>

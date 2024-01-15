@@ -1,18 +1,7 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
-    <br>
-</p>
+Configure the API from Google search Bandels:
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](https://www.yiiframework.com/) application best for
-rapidly creating small projects.
 
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
-
+Configuring the Google Search API into my Yii framework, built on PHP, was a task that demanded a meticulous approach and a solid understanding of both the Yii framework and Google API integration. To begin, I obtained the API key from the Google Cloud Console, ensuring that it had the necessary permissions for the Google Search API. With the key in hand, I navigated to my Yii project and created a dedicated component for handling Google Search requests. This component was designed to encapsulate the API key, construct the necessary HTTP requests, and process the responses. I integrated the component seamlessly into the Yii framework, leveraging Yii's modular structure to keep the code organized and maintainable. Additionally, I configured the necessary routes and actions to handle user input and trigger the Google Search API requests. Testing and debugging played a crucial role in the process, as I fine-tuned the integration to ensure smooth communication between my Yii application and the Google Search API. The end result was a seamlessly integrated Google Search feature within my Yii framework, providing users with a powerful search functionality powered by the robust capabilities of the Google Search API.
 [![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
 [![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
 [![build](https://github.com/yiisoft/yii2-app-basic/workflows/build/badge.svg)](https://github.com/yiisoft/yii2-app-basic/actions?query=workflow%3Abuild)
